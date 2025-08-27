@@ -32,90 +32,112 @@
             </div>
         </div>
 
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-2xl font-bold text-white mb-4">Batch of 2025 (Freshers this year)</h2>
-            <div class="bg-gray-800 shadow-lg rounded-lg overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left" id="studentTable">
-                        <thead class="bg-gray-700">
-                            <tr>
-                                <th class="p-4 font-semibold text-white">Name</th>
-                                <th class="p-4 font-semibold text-white">Branch</th>
-                                <th class="p-4 font-semibold text-white">School</th>
-                                <th class="p-4 font-semibold text-white">Contact</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-700">
-                            <!-- Add student rows here -->
-                            <tr>
-                                <td class="p-4">Ankit Dhakad</td>
-                                <td class="p-4">CE</td>
-                                <td class="p-4">JNV Shivpuri, MP</td>
-                                <td class="p-4">+91 8817486885</td>
-                            </tr>
-                            <tr>
-                                <td class="p-4">Satyam</td>
-                                <td class="p-4">CE</td>
-                                <td class="p-4">Mitauli Lakhimpur Kheri, Uttar Pradesh</td>
-                                <td class="p-4">+91 9793983075</td>
-                            </tr>
-                            <tr>
-                                <td class="p-4">Suresh Kumar</td>
-                                <td class="p-4">CHE</td>
-                                <td class="p-4">JNV Chitrakoot</td>
-                                <td class="p-4">+91 0000000000</td>
-                            </tr>
-                             <tr>
-                                <td class="p-4">Ekta Yadav</td>
-                                <td class="p-4">CHE</td>
-                                <td class="p-4">JNV Deoria, Uttar Pradesh</td>
-                                <td class="p-4">+91 9695562256</td>
-                            </tr>
-                            <tr>
-                                <td class="p-4">Guguloth Vinay</td>
-                                <td class="p-4">CHE</td>
-                                <td class="p-4">Not JNV Iam From A Government College From Telangana</td>
-                                <td class="p-4">+91 9347603996</td>
-                            </tr>
-                             <tr>
-                                <td class="p-4">Mohit Kumar</td>
-                                <td class="p-4">CSE</td>
-                                <td class="p-4">Non JNV</td>
-                                <td class="p-4">+91 0000000000</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div id="batches-container" class="max-w-5xl mx-auto">
+            <!-- Batches and tables will be loaded here by JavaScript -->
         </div>
     </div>
 
     <script>
         lucide.createIcons();
 
-        function searchTable() {
-            // Declare variables
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("searchInput");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("studentTable");
-            tr = table.getElementsByTagName("tr");
+        async function loadMembers() {
+            try {
+                const response = await fetch('members.csv');
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.text();
+                
+                const rows = data.trim().split('\n');
+                const headers = rows.shift().split(',').map(h => h.trim());
+                
+                const students = rows.map(row => {
+                    const values = row.split(',');
+                    return headers.reduce((obj, header, index) => {
+                        obj[header] = values[index] ? values[index].trim() : '';
+                        return obj;
+                    }, {});
+                });
 
-            // Loop through all table rows, and hide those who don't match the search query
-            for (i = 1; i < tr.length; i++) { // Start from 1 to skip the header row
-                tr[i].style.display = "none"; // Hide the row initially
-                td = tr[i].getElementsByTagName("td");
-                for (var j = 0; j < td.length; j++) {
-                    if (td[j]) {
-                        txtValue = td[j].textContent || td[j].innerText;
-                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                            tr[i].style.display = ""; // Show the row if a match is found
-                            break; // No need to check other cells in this row
-                        }
-                    }
+                const batches = students.reduce((acc, student) => {
+                    const batchName = student.Batch || 'Uncategorized';
+                    if (!acc[batchName]) acc[batchName] = [];
+                    acc[batchName].push(student);
+                    return acc;
+                }, {});
+
+                const container = document.getElementById('batches-container');
+                container.innerHTML = ''; // Clear previous content
+
+                for (const batchName in batches) {
+                    const heading = document.createElement('h2');
+                    heading.className = 'text-2xl font-bold text-white mb-4 mt-8';
+                    heading.textContent = batchName;
+                    container.appendChild(heading);
+
+                    const tableContainer = document.createElement('div');
+                    tableContainer.className = 'bg-gray-800 shadow-lg rounded-lg overflow-hidden';
+                    
+                    let tableHTML = `
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left studentTable">
+                                <thead class="bg-gray-700">
+                                    <tr>
+                                        <th class="p-4 font-semibold text-white">Name</th>
+                                        <th class="p-4 font-semibold text-white">Branch</th>
+                                        <th class="p-4 font-semibold text-white">School</th>
+                                        <th class="p-4 font-semibold text-white">Contact</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700">
+                    `;
+
+                    batches[batchName].forEach(student => {
+                        tableHTML += `
+                            <tr>
+                                <td class="p-4">${student.Name}</td>
+                                <td class="p-4">${student.Branch}</td>
+                                <td class="p-4">${student.School}</td>
+                                <td class="p-4">${student.Contact}</td>
+                            </tr>
+                        `;
+                    });
+
+                    tableHTML += `</tbody></table></div>`;
+                    tableContainer.innerHTML = tableHTML;
+                    container.appendChild(tableContainer);
                 }
+
+            } catch (error) {
+                console.error('Error fetching or parsing CSV:', error);
+                const container = document.getElementById('batches-container');
+                container.innerHTML = `<p class="text-center text-red-400">Could not load member data.</p>`;
             }
         }
+
+        function searchTable() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toUpperCase();
+            const tables = document.querySelectorAll(".studentTable");
+
+            tables.forEach(table => {
+                const tr = table.getElementsByTagName("tr");
+                for (let i = 1; i < tr.length; i++) {
+                    let display = "none";
+                    const td = tr[i].getElementsByTagName("td");
+                    for (let j = 0; j < td.length; j++) {
+                        if (td[j]) {
+                            const txtValue = td[j].textContent || td[j].innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                display = "";
+                                break;
+                            }
+                        }
+                    }
+                    tr[i].style.display = display;
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadMembers);
     </script>
 </body>
 </html>
