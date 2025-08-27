@@ -17,26 +17,10 @@
             background-size: cover;
             background-position: center;
         }
-        .gallery-img {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .gallery-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        .animate-fade-in-down {
-            animation: fadeInDown 1s ease-out;
-        }
-        .animate-fade-in-up {
-            animation: fadeInUp 1s ease-out 0.3s backwards;
-        }
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .gallery-link-bg {
+             background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://placehold.co/1600x400/818cf8/ffffff?text=Campus+Moments');
+            background-size: cover;
+            background-position: center;
         }
     </style>
 </head>
@@ -85,8 +69,8 @@
         <!-- Hero Section -->
         <section id="home" class="hero-bg text-white pt-32 pb-20 md:pt-48 md:pb-32">
             <div class="container mx-auto px-6 text-center">
-                <h2 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 animate-fade-in-down">Welcome, Dakshana Scholars!</h2>
-                <p class="text-lg md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto animate-fade-in-up">Welcome to endless opportunities.</p>
+                <h2 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">Welcome, Dakshana Scholars!</h2>
+                <p class="text-lg md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">Welcome to endless opportunities.</p>
                 <a href="#notice-board" class="bg-white text-gray-900 font-bold px-8 py-4 rounded-full hover:bg-gray-200 transition-transform transform hover:scale-105 shadow-2xl">
                     Get Started
                 </a>
@@ -127,12 +111,13 @@
                         </div>
                         <p class="text-gray-400">A checklist of essential items you'll need for your hostel room and classes. Don't forget your documents!</p>
                     </div>
-                    <div class="bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-blue-500">
+                    <div class="bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-blue-500 flex flex-col">
                         <div class="flex items-center mb-3">
                             <i data-lucide="laptop" class="w-8 h-8 text-blue-500 mr-4"></i>
                             <h4 class="text-xl font-semibold text-white">Laptop Guide</h4>
                         </div>
-                        <p class="text-gray-400">Confused about which laptop to buy? Check out our guide with recommended specifications for all departments.</p>
+                        <p class="text-gray-400 flex-grow">Confused about which laptop to buy? Check out our guide with recommended specifications.</p>
+                         <a href="https://drive.google.com/file/d/1zH9uNXgiKLz6ayWHkarOhrkK7urjs25q/view" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block bg-blue-500 text-white text-center px-4 py-2 rounded-md hover:bg-blue-600 transition">Read Guide</a>
                     </div>
                     <div class="bg-gray-800 p-6 rounded-lg shadow-lg border-l-4 border-green-500 flex flex-col">
                         <div class="flex items-center mb-3">
@@ -307,27 +292,14 @@
 
         <!-- Gallery Section -->
         <section id="gallery" class="py-20 bg-gray-800">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h3 class="text-3xl md:text-4xl font-bold text-white">Campus Life in Pictures</h3>
-                    <p class="text-gray-400 mt-2 max-w-2xl mx-auto">A glimpse into the vibrant life at IIT Delhi.</p>
-                </div>
-                <div>
-                    <h4 class="text-2xl font-semibold mb-6 text-white text-center md:text-left">Hostel Life</h4>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-                        <img src="https://placehold.co/600x400/f87171/ffffff?text=Hostel+Fun" alt="Hostel Life 1" class="rounded-lg shadow-md gallery-img">
-                        <img src="https://placehold.co/600x400/fb923c/ffffff?text=Meet-ups" alt="Hostel Life 2" class="rounded-lg shadow-md gallery-img">
-                        <img src="https://placehold.co/600x400/fbbf24/ffffff?text=Birthday" alt="Hostel Life 3" class="rounded-lg shadow-md gallery-img">
-                        <img src="https://placehold.co/600x400/a3e635/ffffff?text=Outings" alt="Hostel Life 4" class="rounded-lg shadow-md gallery-img">
-                    </div>
-                    <h4 class="text-2xl font-semibold mb-6 text-white text-center md:text-left">Fests & Events</h4>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <img src="https://placehold.co/600x400/34d399/ffffff?text=Rendezvous" alt="Fest 1" class="rounded-lg shadow-md gallery-img">
-                        <img src="https://placehold.co/600x400/22d3ee/ffffff?text=Tryst" alt="Fest 2" class="rounded-lg shadow-md gallery-img">
-                        <img src="https://placehold.co/600x400/60a5fa/ffffff?text=Festivals" alt="Fest 3" class="rounded-lg shadow-md gallery-img">
-                        <img src="https://placehold.co/600x400/818cf8/ffffff?text=Other+Events" alt="Fest 4" class="rounded-lg shadow-md gallery-img">
-                    </div>
-                </div>
+            <div class="container mx-auto px-6 text-center">
+                 <div class="gallery-link-bg rounded-lg p-12">
+                    <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">Campus Life in Pictures</h3>
+                    <p class="text-gray-300 max-w-2xl mx-auto mb-8">A glimpse into the vibrant life at IIT Delhi. Check out photos from hostel life, fests, and other events.</p>
+                    <a href="gallery.html" class="bg-white text-gray-900 font-bold px-8 py-3 rounded-full hover:bg-gray-200 transition-transform transform hover:scale-105 shadow-2xl">
+                        View Gallery
+                    </a>
+                 </div>
             </div>
         </section>
 
