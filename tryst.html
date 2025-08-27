@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAAN IITD - Campus Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .album-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-size: cover;
+            background-position: center;
+        }
+        .album-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-300">
+
+    <div class="container mx-auto px-6 py-12">
+        <a href="index.html" class="inline-flex items-center text-indigo-400 hover:text-indigo-300 transition mb-8">
+            <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
+            Back to Main Page
+        </a>
+
+        <h1 class="text-4xl md:text-5xl font-bold text-white text-center mb-12">Campus Life in Pictures</h1>
+
+        <!-- Album Links -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Hostel Life -->
+            <a href="hostel-life.html" class="album-card rounded-lg shadow-lg h-64 flex items-end p-6 relative" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.8)), url('https://placehold.co/600x400/f87171/ffffff?text=Hostel+Life');">
+                <h3 class="text-2xl font-bold text-white">Hostel Life</h3>
+            </a>
+            <!-- Meet-ups -->
+            <a href="meet-ups.html" class="album-card rounded-lg shadow-lg h-64 flex items-end p-6 relative" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.8)), url('https://placehold.co/600x400/fb923c/ffffff?text=Meet-ups');">
+                <h3 class="text-2xl font-bold text-white">Meet-ups</h3>
+            </a>
+            <!-- Birthdays -->
+            <a href="birthdays.html" class="album-card rounded-lg shadow-lg h-64 flex items-end p-6 relative" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.8)), url('https://placehold.co/600x400/fbbf24/ffffff?text=Birthdays');">
+                <h3 class="text-2xl font-bold text-white">Birthdays</h3>
+            </a>
+            <!-- Outings -->
+            <a href="outings.html" class="album-card rounded-lg shadow-lg h-64 flex items-end p-6 relative" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.8)), url('https://placehold.co/600x400/a3e635/ffffff?text=Outings');">
+                <h3 class="text-2xl font-bold text-white">Outings</h3>
+            </a>
+            <!-- Rendezvous -->
+            <a href="rendezvous.html" class="album-card rounded-lg shadow-lg h-64 flex items-end p-6 relative" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.8)), url('https://placehold.co/600x400/34d399/ffffff?text=Rendezvous');">
+                <h3 class="text-2xl font-bold text-white">Rendezvous</h3>
+            </a>
+            <!-- Tryst -->
+            <a href="tryst.html" class="album-card rounded-lg shadow-lg h-64 flex items-end p-6 relative" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.8)), url('https://placehold.co/600x400/22d3ee/ffffff?text=Tryst');">
+                <h3 class="text-2xl font-bold text-white">Tryst</h3>
+            </a>
+            <!-- Festivals -->
+            <a href="festivals.html" class="album-card rounded-lg shadow-lg h-64 flex items-end p-6 relative" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.8)), url('https://placehold.co/600x400/60a5fa/ffffff?text=Festivals');">
+                <h3 class="text-2xl font-bold text-white">Festivals</h3>
+            </a>
+            <!-- Other Events -->
+            <a href="other-events.html" class="album-card rounded-lg shadow-lg h-64 flex items-end p-6 relative" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.8)), url('https://placehold.co/600x400/818cf8/ffffff?text=Other+Events');">
+                <h3 class="text-2xl font-bold text-white">Other Events</h3>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
