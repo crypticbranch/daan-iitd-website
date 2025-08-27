@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAAN IITD - Campus Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-900 text-gray-300">
+
+    <div class="container mx-auto px-6 py-12">
+        <a href="index.html" class="inline-flex items-center text-indigo-400 hover:text-indigo-300 transition mb-8">
+            <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
+            Back to Main Page
+        </a>
+
+        <h1 class="text-4xl md:text-5xl font-bold text-white text-center mb-12">Campus Life in Pictures</h1>
+
+        <div id="photo-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <!-- Photos will be loaded here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // --- How to add photos ---
+        // 1. In your GitHub repository, go into the 'images' folder.
+        // 2. Create a NEW folder inside 'images' and name it exactly 'gallery'.
+        // 3. Upload all your JPG or PNG photos into this new 'images/gallery/' folder.
+        // 4. This script will automatically find and display them.
+
+        const USERNAME = 'crypticbranch'; // Replace with your GitHub username
+        const REPO = 'daan-iitd-website'; // Replace with your repository name
+        const GITHUB_FOLDER_NAME = 'gallery'; 
+
+        async function loadPhotos() {
+            const grid = document.getElementById('photo-grid');
+            const apiUrl = `https://api.github.com/repos/${USERNAME}/${REPO}/contents/images/${GITHUB_FOLDER_NAME}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error('Could not fetch photos from GitHub.');
+                
+                const files = await response.json();
+                
+                if (!files || files.length === 0) {
+                   grid.innerHTML = `<p class="col-span-full text-center">No photos found. Upload images to the 'images/gallery' folder on GitHub.</p>`;
+                   return;
+                }
+
+                files.forEach(file => {
+                    if (file.type === 'file' && (file.name.endsWith('.jpg') || file.name.endsWith('.jpeg') || file.name.endsWith('.png'))) {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = file.download_url;
+                        imgElement.alt = file.name;
+                        imgElement.className = 'rounded-lg shadow-md w-full h-full object-cover aspect-square';
+                        grid.appendChild(imgElement);
+                    }
+                });
+            } catch (error) {
+                console.error('Error loading photos:', error);
+                grid.innerHTML = `<p class="col-span-full text-center text-red-400">Failed to load photos. Make sure the 'images/gallery' folder and images exist on GitHub.</p>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadPhotos);
+    </script>
+</body>
+</html>
